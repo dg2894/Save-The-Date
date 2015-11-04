@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     var tableData:[EventfulEvent] = []
+    var noResults = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,15 +20,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         
         tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
-        
-        //searchEvents("boston")
     }
     
     func searchEvents(location:String){
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         
-        let myEventsURL = "http://api.eventful.com/json/events/search?app_key=6BFr8DV4jBWKTbw3&location="
+        let myEventsURL = "http://api.eventful.com/json/events/search?app_key=6BFr8DV4jBWKTbw3&sort_order=date&location="
         let url = NSURL(string:myEventsURL + location)
         
         let dataTask = session.dataTaskWithURL(url!, completionHandler:{
@@ -53,19 +52,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                       //if d1 is not a dictionary, bail out
                         if !(d1 is [String:AnyObject]){
                             print("d1 is not a dictionary - No results found")
-                            return
+                            self.noResults = true
+                            
+                            //return
                         }
                         
                         if let a1 = d1["event"]{
                             //if a1 is not an array of dictionaries, bail out
                             if !(a1 is [[String:AnyObject]]){
                                 print("a1 is not an array of dictionaries - No results found")
-                                return
+                                self.noResults = true
+                                
+                                //return
                             }
                             
                             for d2 in a1 as! [[String:AnyObject]]{
                                 var eventTitle = ""
                                 var eventDate = ""
+                                var eventURL = ""
+                                var eventDesc = ""
                                 //is there a title key in the dictionary?
                                 if let title = d2["title"] as! String?{
                                     eventTitle += title
@@ -75,7 +80,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                     eventDate += date
                                 }
                                 
-                                let event = EventfulEvent(title: eventTitle, date: eventDate)
+                                if let url = d2["url"] as! String? {
+                                    eventURL += url
+                                }
+                                
+                                if d2["description"] is NSNull{
+                                    eventDesc += "No description"
+                                } else if let desc = d2["description"] as! String?{
+                                    var str = desc.stringByReplacingOccurrencesOfString("<[^>]+>", withString: " ", options: .RegularExpressionSearch, range: nil)
+                                    str = str.stringByReplacingOccurrencesOfString("&#39;", withString: "'", options: .RegularExpressionSearch, range: nil)
+                                    eventDesc += str
+                                }
+                                
+                                let latitude = (d2["latitude"] as! NSString).floatValue
+                                let longitude = (d2["longitude"] as! NSString).floatValue
+                                
+                                self.noResults = false
+                                
+                                let event = EventfulEvent(theTitle: eventTitle, theDate: eventDate, theUrl:eventURL, theDesc: eventDesc, latitude: latitude, longitude: longitude)
                                 
                                 self.tableData.append(event)
                             }
@@ -134,25 +156,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (noResults){
+            return 1
+        } else {
         return tableData.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlainCell", forIndexPath: indexPath)
-                cell.textLabel?.text = tableData[indexPath.row].title
-                cell.detailTextLabel?.text = "Start time: \(tableData[indexPath.row].date)"
-                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                return cell
+        if (noResults) {
+            cell.textLabel?.text = "No Results Found"
+            cell.detailTextLabel?.text = ""
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            return cell
+        } else {
+            cell.textLabel?.text = tableData[indexPath.row].title
+            cell.detailTextLabel?.text = "Start time: \(tableData[indexPath.row].date)"
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            return cell
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (!noResults){
         let detailVC: DetailVC = storyboard!.instantiateViewControllerWithIdentifier("DetailVC") as! DetailVC
-        
         let bookmark = tableData[indexPath.row]
         detailVC.bookmark = bookmark
         
         self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
 

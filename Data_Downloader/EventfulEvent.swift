@@ -7,13 +7,41 @@
 //
 
 import UIKit
+import Foundation
+import MapKit
+import CoreLocation
 
-class EventfulEvent {
-    var title:String
-    var date:String
+public class EventfulEvent:NSObject, MKAnnotation {
     
-    init(title:String, date:String){
-        self.title = title;
-        self.date = date;
+    private var theTitle:String
+    private var theDate:String
+    private var theUrl:String
+    private var theDesc: String
+    public var coordinate:CLLocationCoordinate2D
+    
+    init(theTitle:String, theDate:String, theUrl:String, theDesc:String, latitude:Float, longitude:Float){
+        self.theTitle = theTitle
+        self.theDate = theDate
+        self.theUrl = theUrl
+        self.theDesc = theDesc
+        coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(latitude), CLLocationDegrees(longitude))
     }
+    
+    public var title:String?{
+        return theTitle
+    }
+    
+    public var date:String?{
+        return theDate
+    }
+    
+    public var url:String?{
+        return theUrl
+    }
+    
+    public var desc:String?{
+        return theDesc
+    }
+
+    
 }

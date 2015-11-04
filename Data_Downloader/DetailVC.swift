@@ -15,6 +15,8 @@ class DetailVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,8 +55,8 @@ class DetailVC: UITableViewController {
         //configure the cell
         if indexPath.section == 1{
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.text = "We could a description of the link here, tags, etc..."
-            cell.textLabel?.textColor = view.tintColor //clickable blue
+            cell.textLabel?.text = bookmark?.desc
+            cell.textLabel?.textColor = UIColor.blackColor()
             cell.textLabel?.textAlignment = NSTextAlignment.Center
         }
         
@@ -70,19 +72,22 @@ class DetailVC: UITableViewController {
     
     //MARK: - Table view delegate
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 1{
-            return 100.0
-        }
-        
-        return 44.0
-    }
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        if indexPath.section == 1{
+//            return 100.0
+//        }
+//        
+//        return 44.0
+//    }
     
-    /*override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 2 {
         if let url = NSURL(string: (bookmark?.url)!){
             UIApplication.sharedApplication().openURL(url)
         }
-    }*/
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

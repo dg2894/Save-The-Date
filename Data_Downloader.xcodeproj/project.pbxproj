@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		870D76D21BEA984A007F4418 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870D76D11BEA984A007F4418 /* MapKit.framework */; };
 		871A449B1BCEA85500909E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A449A1BCEA85500909E59 /* AppDelegate.swift */; };
 		871A449D1BCEA85500909E59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A449C1BCEA85500909E59 /* ViewController.swift */; };
 		871A44A01BCEA85500909E59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871A449E1BCEA85500909E59 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		870D76D11BEA984A007F4418 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		871A44971BCEA85500909E59 /* Data_Downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Data_Downloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		871A449A1BCEA85500909E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		871A449C1BCEA85500909E59 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				870D76D21BEA984A007F4418 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 		871A448E1BCEA85500909E59 = {
 			isa = PBXGroup;
 			children = (
+				870D76D11BEA984A007F4418 /* MapKit.framework */,
 				871A44991BCEA85500909E59 /* Data_Downloader */,
 				871A44AE1BCEA85500909E59 /* Data_DownloaderTests */,
 				871A44B91BCEA85500909E59 /* Data_DownloaderUITests */,
@@ -198,6 +202,11 @@
 				TargetAttributes = {
 					871A44961BCEA85500909E59 = {
 						CreatedOnToolsVersion = 7.0.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					871A44AA1BCEA85500909E59 = {
 						CreatedOnToolsVersion = 7.0.1;

@@ -17,7 +17,7 @@ class FavoritesVC: UITableViewController {
         super.viewDidLoad()
         
         // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
+        //self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -47,34 +47,21 @@ class FavoritesVC: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if favorites.count > 0 {
-            return favorites.count
-        } else {
-            return 1
-        }
+        return favorites.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlainCell", forIndexPath: indexPath)
-        if (favorites.count == 0) {
-            cell.textLabel?.text = "You do not have any favorites yet."
-            cell.detailTextLabel?.text = ""
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            return cell
-        } else {
-            cell.textLabel?.text = favorites[indexPath.row].title
-            cell.detailTextLabel?.text = "Start time: \(favorites[indexPath.row].date)"
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            return cell
-        }
+        cell.textLabel?.text = favorites[indexPath.row].title
+        cell.detailTextLabel?.text = "Start time: \(favorites[indexPath.row].date)"
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -82,8 +69,6 @@ class FavoritesVC: UITableViewController {
             let detailVC: DetailVC = storyboard!.instantiateViewControllerWithIdentifier("DetailVC") as! DetailVC
             let bookmark = favorites[indexPath.row]
             detailVC.bookmark = bookmark
-            
-            
             self.navigationController?.pushViewController(detailVC, animated: true)
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
@@ -92,6 +77,7 @@ class FavoritesVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            favorites[indexPath.row].faved = false;
             favorites.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }

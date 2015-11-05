@@ -172,7 +172,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.textLabel?.text = tableData[indexPath.row].title
             cell.detailTextLabel?.text = "Start time: \(tableData[indexPath.row].date)"
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             return cell
         }
     }

@@ -146,8 +146,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.reloadData()
             if(isConnectedToNetwork()) {
                 searchEvents(trimmed)
-            
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             } else {
                 let alert = UIAlertController(title: "Uh-Oh!", message: "Please check your network connection and try again.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -180,6 +179,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.textLabel?.text = "No Results Found"
             cell.detailTextLabel?.text = ""
             cell.accessoryType = UITableViewCellAccessoryType.None
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             return cell
         } else {
             cell.textLabel?.text = tableData[indexPath.row].title

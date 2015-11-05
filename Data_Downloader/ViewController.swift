@@ -85,8 +85,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 if d2["description"] is NSNull{
                                     eventDesc += "No description"
                                 } else if let desc = d2["description"] as! String?{
-                                    var str = desc.stringByReplacingOccurrencesOfString("<[^>]+>", withString: " ", options: .RegularExpressionSearch, range: nil)
+                                    var str = desc.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
                                     str = str.stringByReplacingOccurrencesOfString("&#39;", withString: "'", options: .RegularExpressionSearch, range: nil)
+                                    str = str.stringByReplacingOccurrencesOfString("&quot;", withString: "\"", options: .RegularExpressionSearch, range: nil)
                                     eventDesc += str
                                 }
                                 

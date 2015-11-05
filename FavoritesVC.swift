@@ -20,7 +20,8 @@ class FavoritesVC: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
         noResults = true
         if(favorites.count > 0) {
             noResults = false
@@ -86,6 +87,20 @@ class FavoritesVC: UITableViewController {
             self.navigationController?.pushViewController(detailVC, animated: true)
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            favorites.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+        let favoriteToMove = favorites.removeAtIndex(fromIndexPath.row)
+        favorites.insert(favoriteToMove, atIndex: toIndexPath.row)
+        
     }
 
 }

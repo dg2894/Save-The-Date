@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import Social
 
 class DetailVC: UITableViewController {
 
+    @IBAction func shareTapped(sender: AnyObject) {
+        let string:String = "Check out this cool event!"
+        let activityViewController = UIActivityViewController(activityItems: [string, bookmark!.url!], applicationActivities: nil)
+        if (UIDevice.currentDevice().userInterfaceIdiom == .Pad)
+        {
+            let popup = UIPopoverController(contentViewController: activityViewController)
+            popup.presentPopoverFromBarButtonItem(sender as! UIBarButtonItem, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        } else {
+            
+            presentViewController(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
     let myPlainCell = "PlainCell"
+    var font:UIFont!
     var bookmark:EventfulEvent?
     var favesVC: FavoritesVC!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +35,8 @@ class DetailVC: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         let navVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
         favesVC = navVC.viewControllers[0] as! FavoritesVC
+        
+        font = UIFont(name: "Avenir", size: 18)!
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,6 +44,7 @@ class DetailVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,7 +55,7 @@ class DetailVC: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 4
+        return 5
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,31 +83,27 @@ class DetailVC: UITableViewController {
         
         if indexPath.section == 2 {
             cell.textLabel?.text = "View on web"
-            cell.textLabel?.font = UIFont.systemFontOfSize(18.0)
+            cell.textLabel?.font = font
             cell.textLabel?.textColor = view.tintColor //clickable blue
             cell.textLabel?.textAlignment = NSTextAlignment.Center
         }
         
         if indexPath.section == 3 {
             cell.textLabel?.text = "Add to Favorites"
-            cell.textLabel?.font = UIFont.systemFontOfSize(18.0)
+            cell.textLabel?.font = font
+            cell.textLabel?.textColor = view.tintColor //clickable blue
+            cell.textLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
+        if indexPath.section == 4 {
+            cell.textLabel?.text = "Show Event Location on Map"
+            cell.textLabel?.font = font
             cell.textLabel?.textColor = view.tintColor //clickable blue
             cell.textLabel?.textAlignment = NSTextAlignment.Center
         }
         
         return cell
     }
-    
-    //MARK: - Table view delegate
-    
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        if indexPath.section == 1{
-//            return 100.0
-//        }
-//        
-//        return 44.0
-//    }
-    
     
     override func tableView(tableView: UITableView,didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -108,53 +121,8 @@ class DetailVC: UITableViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+    
         
          tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -157,7 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (noResults){
             return 1
         } else {
-        return tableData.count
+            return tableData.count
         }
     }
     

@@ -12,13 +12,15 @@ class DetailVC: UITableViewController {
 
     let myPlainCell = "PlainCell"
     var bookmark:EventfulEvent?
-    var favesVC: FavoritesVC = FavoritesVC()
+    var favesVC: FavoritesVC!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        let navVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
+        favesVC = navVC.viewControllers[0] as! FavoritesVC
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -99,9 +101,8 @@ class DetailVC: UITableViewController {
         }
         
         if indexPath.section == 3 && bookmark?.faved == false {
-            favesVC.favorites.append(bookmark!)
+            favesVC.favorites += [bookmark!]
             bookmark?.faved = true
-            print(favesVC.favorites.count)
         } else if indexPath.section == 3 && bookmark?.faved == true {
             let alert = UIAlertController(title: "Oops!", message: "You have already favorited this event.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

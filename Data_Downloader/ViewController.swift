@@ -144,9 +144,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableData = [EventfulEvent]()
             
             tableView.reloadData()
+            if(isConnectedToNetwork()) {
+                searchEvents(trimmed)
             
-            searchEvents(trimmed)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            } else {
+                let alert = UIAlertController(title: "Uh-Oh!", message: "Please check your network connection and try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
     }
     
@@ -195,5 +201,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
+    
+    func isConnectedToNetwork()->Bool{
+        
+        var Status:Bool!
+        let url = NSURL(string: "http://google.com/")
+        let request = NSMutableURLRequest(URL: url!)
+        request.HTTPMethod = "HEAD"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 10.0
+        
+        var response: NSURLResponse?
+        
+        do {
+            _ = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response) as NSData?
+            
+            if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    Status = true
+                }
+            }
+        } catch {
+            Status = false
+        }
+        
+        return Status
+    }
+    
 }
 

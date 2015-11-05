@@ -17,13 +17,15 @@ public class EventfulEvent:NSObject, MKAnnotation {
     private var theDate:String
     private var theUrl:String
     private var theDesc: String
+    private var isFaved:Bool
     public var coordinate:CLLocationCoordinate2D
     
-    init(theTitle:String, theDate:String, theUrl:String, theDesc:String, latitude:Float, longitude:Float){
+    init(theTitle:String, theDate:String, theUrl:String, theDesc:String, latitude:Float, longitude:Float, isFaved:Bool){
         self.theTitle = theTitle
         self.theDate = theDate
         self.theUrl = theUrl
         self.theDesc = theDesc
+        self.isFaved = isFaved
         coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(latitude), CLLocationDegrees(longitude))
     }
     
@@ -41,6 +43,15 @@ public class EventfulEvent:NSObject, MKAnnotation {
     
     public var desc:String?{
         return theDesc
+    }
+    
+    public var faved:Bool?{
+        get {
+            return isFaved
+        }
+        set (newVal) {
+            isFaved = newVal!
+        }
     }
 
     

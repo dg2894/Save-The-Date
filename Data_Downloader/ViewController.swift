@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                                 self.noResults = false
                                 
-                                let event = EventfulEvent(theTitle: eventTitle, theDate: eventDate, theUrl:eventURL, theDesc: eventDesc, latitude: latitude, longitude: longitude)
+                                let event = EventfulEvent(theTitle: eventTitle, theDate: eventDate, theUrl:eventURL, theDesc: eventDesc, latitude: latitude, longitude: longitude, isFaved: false)
                                 
                                 self.tableData.append(event)
                             }
@@ -182,8 +182,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let detailVC: DetailVC = storyboard!.instantiateViewControllerWithIdentifier("DetailVC") as! DetailVC
         let bookmark = tableData[indexPath.row]
         detailVC.bookmark = bookmark
+
         
         self.navigationController?.pushViewController(detailVC, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
 }

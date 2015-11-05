@@ -204,17 +204,17 @@
             </objects>
             <point key="canvasLocation" x="1165" y="1112"/>
         </scene>
-        <!--Table View Controller-->
+        <!--FavoritesVC-->
         <scene sceneID="VMu-5w-K3B">
             <objects>
-                <tableViewController id="KGN-oh-lJh" sceneMemberID="viewController">
+                <tableViewController id="KGN-oh-lJh" customClass="FavoritesVC" customModule="Data_Downloader" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="72h-eO-IgA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LJ6-Vj-QsD">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlainCell" id="LJ6-Vj-QsD">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LJ6-Vj-QsD" id="O07-RM-bc0">
@@ -259,7 +259,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="SRR-xV-utE">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BeW-Ao-AQT" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="BeW-Ao-AQT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OEz-7J-MrW">
                         <autoresizingMask key="autoresizingMask"/>

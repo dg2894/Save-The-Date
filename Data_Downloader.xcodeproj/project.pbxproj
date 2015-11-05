@@ -18,6 +18,7 @@
 		87211B101BEBD33300627865 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87211B0F1BEBD33300627865 /* FavoritesVC.swift */; };
 		8762E2C01BE7C67000F55BA1 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762E2BF1BE7C67000F55BA1 /* DetailVC.swift */; };
 		87EAD6901BD7F12F00B9D05D /* EventfulEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EAD68F1BD7F12F00B9D05D /* EventfulEvent.swift */; };
+		F2087BEC1BEBF159001523EE /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2087BEB1BEBF159001523EE /* MapVC.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		87211B0F1BEBD33300627865 /* FavoritesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoritesVC.swift; path = ../FavoritesVC.swift; sourceTree = "<group>"; };
 		8762E2BF1BE7C67000F55BA1 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		87EAD68F1BD7F12F00B9D05D /* EventfulEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventfulEvent.swift; sourceTree = "<group>"; };
+		F2087BEB1BEBF159001523EE /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				871A449C1BCEA85500909E59 /* ViewController.swift */,
 				8762E2BF1BE7C67000F55BA1 /* DetailVC.swift */,
 				87211B0F1BEBD33300627865 /* FavoritesVC.swift */,
+				F2087BEB1BEBF159001523EE /* MapVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87211B101BEBD33300627865 /* FavoritesVC.swift in Sources */,
+				F2087BEC1BEBF159001523EE /* MapVC.swift in Sources */,
 				871A449D1BCEA85500909E59 /* ViewController.swift in Sources */,
 				8762E2C01BE7C67000F55BA1 /* DetailVC.swift in Sources */,
 				87EAD6901BD7F12F00B9D05D /* EventfulEvent.swift in Sources */,

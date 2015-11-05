@@ -182,7 +182,7 @@
         <!--Maps-->
         <scene sceneID="ACn-lD-2qH">
             <objects>
-                <viewController id="DBO-di-ZDs" sceneMemberID="viewController">
+                <viewController id="DBO-di-ZDs" customClass="MapVC" customModule="Data_Downloader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l0N-ZM-cYo"/>
                         <viewControllerLayoutGuide type="bottom" id="Ij0-Ut-j5W"/>
@@ -206,6 +206,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Maps" image="Maps Tab" id="EcG-37-bP5"/>
+                    <connections>
+                        <outlet property="map" destination="39P-b0-fvw" id="OMo-uW-fyX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AI8-S0-RC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var noResults = false
     
     @IBOutlet weak var tableView: UITableView!
+    let METERS_PER_MILE:Double = 1609.344
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +104,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         }
                     }
                     
+                    if self.tableData.count > 0 {
+                        let mapView = self.tabBarController?.viewControllers![1] as! MapVC
+                        mapView.map?.addAnnotations(self.tableData)
+                    }
+                        
                     
                     //all done? call back to main thread
                     dispatch_async(dispatch_get_main_queue(),{

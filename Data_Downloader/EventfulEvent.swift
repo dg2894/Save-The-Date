@@ -53,6 +53,5 @@ public class EventfulEvent:NSObject, MKAnnotation {
             isFaved = newVal!
         }
     }
-
     
 }

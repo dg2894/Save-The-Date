@@ -71,6 +71,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549019602" green="0.0" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="EPa-Rd-bUO" secondAttribute="trailing" constant="-20" id="9uL-oW-eTX"/>
                             <constraint firstItem="EPa-Rd-bUO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="VR7-mJ-dRb"/>
@@ -99,6 +100,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlainCell" id="XrH-Rz-Cfk">
                                 <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
@@ -147,6 +149,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="O7o-IQ-s8T" secondAttribute="trailing" constant="-20" id="6th-Yc-7q1"/>
                             <constraint firstItem="O7o-IQ-s8T" firstAttribute="top" secondItem="Bmw-qc-hls" secondAttribute="topMargin" id="Pnf-Uy-Vx5"/>
@@ -198,6 +201,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Ij0-Ut-j5W" firstAttribute="top" secondItem="39P-b0-fvw" secondAttribute="bottom" id="OoF-cp-T9l"/>
                             <constraint firstAttribute="trailingMargin" secondItem="39P-b0-fvw" secondAttribute="trailing" constant="-20" id="cy2-ta-pg7"/>
@@ -223,6 +227,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlainCell" id="LJ6-Vj-QsD">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
@@ -289,6 +294,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="I8z-TB-9JL" firstAttribute="centerX" secondItem="sOe-iI-pcv" secondAttribute="centerX" id="dEX-oQ-cIh"/>
                             <constraint firstItem="sOe-iI-pcv" firstAttribute="centerX" secondItem="asm-zL-SqN" secondAttribute="centerX" id="fgM-qU-WYQ"/>
@@ -313,7 +319,13 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OEz-7J-MrW">
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.98431372549019602" green="0.0" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="Qjo-kK-NxO" kind="relationship" relationship="viewControllers" id="Kmy-ji-IzF"/>
@@ -336,6 +348,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -355,6 +368,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -371,4 +385,5 @@
         <image name="Maps Tab" width="25" height="25"/>
         <image name="logo" width="1135" height="795"/>
     </resources>
+    <color key="tintColor" red="0.98431372549999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -31,7 +31,6 @@ class MapVC: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(animated: Bool) {
         var events = manager.getEvents()
         map.addAnnotations(events)
-        print(index)
         if !fromDetail {
             if(events.count > 0) {
                 let myRegion = MKCoordinateRegionMakeWithDistance(events[0].coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)

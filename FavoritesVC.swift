@@ -10,9 +10,11 @@ import UIKit
 
 class FavoritesVC: UITableViewController {
     
-    
     var favorites:[EventfulEvent] = []
     var noResults:Bool!
+    var manager:EventManager = EventManager.sharedInstance
+    var VC:ViewController!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class FavoritesVC: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        favorites = manager.getFavorites()
         self.tableView.reloadData()
         if(favorites.count > 0) {
             noResults = false
@@ -74,8 +77,9 @@ class FavoritesVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            favorites[indexPath.row].faved = false;
+            favorites[indexPath.row].faved = false
             favorites.removeAtIndex(indexPath.row)
+            manager.setFavorites(favorites)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
@@ -83,7 +87,6 @@ class FavoritesVC: UITableViewController {
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
         let favoriteToMove = favorites.removeAtIndex(fromIndexPath.row)
         favorites.insert(favoriteToMove, atIndex: toIndexPath.row)
-        
     }
 
 }

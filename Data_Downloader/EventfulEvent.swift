@@ -11,7 +11,7 @@ import Foundation
 import MapKit
 import CoreLocation
 
-public class EventfulEvent:NSObject, MKAnnotation {
+public class EventfulEvent:NSObject, MKAnnotation, NSCoding {
     
     private var theTitle:String
     private var theDate:String
@@ -27,6 +27,8 @@ public class EventfulEvent:NSObject, MKAnnotation {
         self.theDesc = theDesc
         self.isFaved = isFaved
         coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(latitude), CLLocationDegrees(longitude))
+        
+        super.init()
     }
     
     public var title:String?{
@@ -52,6 +54,32 @@ public class EventfulEvent:NSObject, MKAnnotation {
         set (newVal) {
             isFaved = newVal!
         }
+    }
+    
+    // MARK: NSCoding
+
+    public func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(theTitle, forKey: "title")
+        aCoder.encodeObject(theDate, forKey: "date")
+        aCoder.encodeObject(theUrl, forKey: "url")
+        aCoder.encodeObject(theDesc, forKey: "desc")
+        aCoder.encodeBool(isFaved, forKey: "faved")
+        aCoder.encodeDouble(coordinate.latitude, forKey: "latitude")
+        aCoder.encodeDouble(coordinate.longitude, forKey: "longitude")
+    }
+    
+    required public init(coder aDecoder:NSCoder){
+        theTitle = aDecoder.decodeObjectForKey("title") as! String
+        theDate = aDecoder.decodeObjectForKey("date") as! String
+        theUrl = aDecoder.decodeObjectForKey("url") as! String
+        theDesc = aDecoder.decodeObjectForKey("desc") as! String
+        isFaved = aDecoder.decodeBoolForKey("faved")
+        let latitude = aDecoder.decodeDoubleForKey("latitude")
+        let longitude = aDecoder.decodeDoubleForKey("longitude")
+        coordinate = CLLocationCoordinate2DMake(
+        CLLocationDegrees (latitude),
+        CLLocationDegrees (longitude))
+        super.init()
     }
     
 }

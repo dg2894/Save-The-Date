@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var tableData:[EventfulEvent] = []
     var noResults = false
     var manager:EventManager = EventManager.sharedInstance
+    var FVC:FavoritesVC!
+
     
     @IBOutlet weak var tableView: UITableView!
     let METERS_PER_MILE:Double = 1609.344
@@ -20,6 +22,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        loadData()
+        
+        let navVC = self.tabBarController?.viewControllers?[2] as! UINavigationController
+        FVC = navVC.viewControllers[0] as! FavoritesVC
+        
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveData", name: UIApplicationWillResignActiveNotification, object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
+    func saveData(){
+        if FVC.favorites.count > 0 {
+            manager.setFavorites(FVC.favorites)
+            let myData = NSKeyedArchiver.archivedDataWithRootObject(manager.getFavorites())
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(myData, forKey: "faves")
+        }
+    }
+    
+    func loadData(){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let favesData = defaults.objectForKey("faves") as? NSData
+        
+        if let favesData = favesData {
+            let favesArray = NSKeyedUnarchiver.unarchiveObjectWithData(favesData) as? [EventfulEvent]
+            
+            if let favesArray = favesArray{
+                manager.setFavorites(favesArray)
+            }
+        }
+        
     }
     
     func searchEvents(location:String){
@@ -71,6 +107,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 var eventDate = ""
                                 var eventURL = ""
                                 var eventDesc = ""
+                                var eventFav = false
                                 //is there a title key in the dictionary?
                                 if let title = d2["title"] as! String?{
                                     eventTitle += title
@@ -96,9 +133,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 let latitude = (d2["latitude"] as! NSString).floatValue
                                 let longitude = (d2["longitude"] as! NSString).floatValue
                                 
+                                for e in self.manager.getFavorites(){
+                                    if eventTitle == e.title
+                                    && eventDate == e.date
+                                    && eventURL == e.url
+                                    && eventDesc == e.desc {
+                                        eventFav = true
+                                    }
+                                }
+                                
                                 self.noResults = false
                                 
-                                let event = EventfulEvent(theTitle: eventTitle, theDate: eventDate, theUrl:eventURL, theDesc: eventDesc, latitude: latitude, longitude: longitude, isFaved: false)
+                                let event = EventfulEvent(theTitle: eventTitle, theDate: eventDate, theUrl:eventURL, theDesc: eventDesc, latitude: latitude, longitude: longitude, isFaved: eventFav)
                                 
                                 self.tableData.append(event)
                             }

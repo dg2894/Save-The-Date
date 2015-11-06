@@ -115,6 +115,7 @@ class DetailVC: UITableViewController {
         
         if indexPath.section == 3 && bookmark?.faved == false {
             favesVC.favorites += [bookmark!]
+            manager.setFavorites(favesVC.favorites)
             bookmark?.faved = true
         } else if indexPath.section == 3 && bookmark?.faved == true {
             let alert = UIAlertController(title: "Oops!", message: "You have already favorited this event.", preferredStyle: UIAlertControllerStyle.Alert)

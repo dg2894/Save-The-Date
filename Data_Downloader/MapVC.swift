@@ -12,6 +12,8 @@ import MapKit
 class MapVC: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var map: MKMapView!
+    var manager:EventManager = EventManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,10 @@ class MapVC: UIViewController, MKMapViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        map.addAnnotations(manager.getEvents())
     }
     
 

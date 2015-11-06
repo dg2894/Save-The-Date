@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var tableData:[EventfulEvent] = []
     var noResults = false
+    var manager:EventManager = EventManager.sharedInstance
     
     @IBOutlet weak var tableView: UITableView!
     let METERS_PER_MILE:Double = 1609.344
@@ -104,10 +105,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         }
                     }
                     
-                    if self.tableData.count > 0 {
-                        let mapView = self.tabBarController?.viewControllers![1] as! MapVC
-                        mapView.map?.addAnnotations(self.tableData)
-                    }
+                    
+                    self.manager.setEvents(self.tableData)
                         
                     
                     //all done? call back to main thread

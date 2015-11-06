@@ -16,10 +16,6 @@ class FavoritesVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        //self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         noResults = true
@@ -30,7 +26,7 @@ class FavoritesVC: UITableViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
         if(favorites.count > 0) {
             noResults = false

@@ -55,7 +55,7 @@ class DetailVC: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 5
+        return 6
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,32 +73,39 @@ class DetailVC: UITableViewController {
             cell.textLabel?.font = UIFont.boldSystemFontOfSize(15.0)
         }
         
+        if indexPath.section == 1 {
+            cell.textLabel?.text = "Event Date: " + (bookmark?.date)!
+            cell.textLabel?.font = font
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.textLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
         //configure the cell
-        if indexPath.section == 1{
+        if indexPath.section == 2 {
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = bookmark?.desc
             cell.textLabel?.textColor = UIColor.blackColor()
             cell.textLabel?.textAlignment = NSTextAlignment.Center
         }
         
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             cell.textLabel?.text = "View on web"
             cell.textLabel?.font = font
-            cell.textLabel?.textColor = view.tintColor //clickable blue
-            cell.textLabel?.textAlignment = NSTextAlignment.Center
-        }
-        
-        if indexPath.section == 3 {
-            cell.textLabel?.text = "Add to Favorites"
-            cell.textLabel?.font = font
-            cell.textLabel?.textColor = view.tintColor //clickable blue
+            cell.textLabel?.textColor = view.tintColor
             cell.textLabel?.textAlignment = NSTextAlignment.Center
         }
         
         if indexPath.section == 4 {
+            cell.textLabel?.text = "Add to Favorites"
+            cell.textLabel?.font = font
+            cell.textLabel?.textColor = view.tintColor
+            cell.textLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
+        if indexPath.section == 5 {
             cell.textLabel?.text = "Show Event Location on Map"
             cell.textLabel?.font = font
-            cell.textLabel?.textColor = view.tintColor //clickable blue
+            cell.textLabel?.textColor = view.tintColor
             cell.textLabel?.textAlignment = NSTextAlignment.Center
         }
         
@@ -107,21 +114,21 @@ class DetailVC: UITableViewController {
     
     override func tableView(tableView: UITableView,didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             if let url = NSURL(string: (bookmark?.url)!){
                 UIApplication.sharedApplication().openURL(url)
             }
         }
         
-        if indexPath.section == 3 && bookmark?.faved == false {
+        if indexPath.section == 4 && bookmark?.faved == false {
             favesVC.favorites += [bookmark!]
             manager.setFavorites(favesVC.favorites)
             bookmark?.faved = true
-        } else if indexPath.section == 3 && bookmark?.faved == true {
+        } else if indexPath.section == 4 && bookmark?.faved == true {
             let alert = UIAlertController(title: "Oops!", message: "You have already favorited this event.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-        } else if indexPath.section == 4 {
+        } else if indexPath.section == 5 {
             let mapView = self.tabBarController?.viewControllers?[1] as! MapVC
             mapView.index = bookmarkIndex
             mapView.fromDetail = true

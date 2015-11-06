@@ -35,6 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
     }
     
+    //save favorites array
     func saveData(){
         if FVC.favorites.count > 0 {
             manager.setFavorites(FVC.favorites)
@@ -44,6 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    //load favorites array
     func loadData(){
         let defaults = NSUserDefaults.standardUserDefaults()
         let favesData = defaults.objectForKey("faves") as? NSData
@@ -89,8 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         if !(d1 is [String:AnyObject]){
                             print("d1 is not a dictionary - No results found")
                             self.noResults = true
-                            
-                            //return
+                            return
                         }
                         
                         if let a1 = d1["event"]{
@@ -98,8 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             if !(a1 is [[String:AnyObject]]){
                                 print("a1 is not an array of dictionaries - No results found")
                                 self.noResults = true
-                                
-                                //return
+                                return
                             }
                             
                             for d2 in a1 as! [[String:AnyObject]]{
@@ -228,7 +228,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return cell
         } else {
             cell.textLabel?.text = tableData[indexPath.row].title
-            cell.detailTextLabel?.text = "Start time: \(tableData[indexPath.row].date)"
+            cell.detailTextLabel?.text = "Start time: " + tableData[indexPath.row].date!
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             return cell

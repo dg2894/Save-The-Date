@@ -13,6 +13,9 @@ class MapVC: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var map: MKMapView!
     var manager:EventManager = EventManager.sharedInstance
+    var METERS_PER_MILE:Double = 1609.344
+    var index:Int?
+    var fromDetail:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +29,22 @@ class MapVC: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        map.addAnnotations(manager.getEvents())
+        var events = manager.getEvents()
+        map.addAnnotations(events)
+        print(index)
+        if !fromDetail {
+            if(events.count > 0) {
+                let myRegion = MKCoordinateRegionMakeWithDistance(events[0].coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)
+                map.setRegion(myRegion, animated: true)
+                map.selectAnnotation(events[0], animated: false)
+            }
+        } else {
+            let myRegion = MKCoordinateRegionMakeWithDistance(events[index!].coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)
+            map.setRegion(myRegion, animated: true)
+            map.selectAnnotation(events[index!], animated: false)
+            fromDetail = false
+            index = nil
+        }
     }
     
 

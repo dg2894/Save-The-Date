@@ -194,6 +194,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let detailVC: DetailVC = storyboard!.instantiateViewControllerWithIdentifier("DetailVC") as! DetailVC
         let bookmark = tableData[indexPath.row]
         detailVC.bookmark = bookmark
+        detailVC.bookmarkIndex = indexPath.row
 
         
         self.navigationController?.pushViewController(detailVC, animated: true)

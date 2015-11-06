@@ -10,6 +10,7 @@ import UIKit
 
 class FavoritesVC: UITableViewController {
     
+    
     var favorites:[EventfulEvent] = []
     var noResults:Bool!
     

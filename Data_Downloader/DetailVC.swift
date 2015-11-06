@@ -8,9 +8,10 @@
 
 import UIKit
 import Social
+import Foundation
 
 class DetailVC: UITableViewController {
-
+    
     @IBAction func shareTapped(sender: AnyObject) {
         let string:String = "Check out this cool event!"
         let activityViewController = UIActivityViewController(activityItems: [string, bookmark!.url!], applicationActivities: nil)
@@ -28,6 +29,11 @@ class DetailVC: UITableViewController {
     var font:UIFont!
     var bookmark:EventfulEvent?
     var favesVC: FavoritesVC!
+    var bookmarkIndex:Int?
+    var METERS_PER_MILE:Double = 1609.344
+    
+    var manager:EventManager = EventManager.sharedInstance
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +120,11 @@ class DetailVC: UITableViewController {
             let alert = UIAlertController(title: "Oops!", message: "You have already favorited this event.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+        } else if indexPath.section == 4 {
+            let mapView = self.tabBarController?.viewControllers?[1] as! MapVC
+            mapView.index = bookmarkIndex
+            mapView.fromDetail = true
+            tabBarController?.selectedIndex = 1
         }
     
         

@@ -68,6 +68,7 @@ class FavoritesVC: UITableViewController {
         if (!noResults){
             let detailVC: DetailVC = storyboard!.instantiateViewControllerWithIdentifier("DetailVC") as! DetailVC
             let bookmark = favorites[indexPath.row]
+            detailVC.bookmarkIndex = indexPath.row
             detailVC.bookmark = bookmark
             self.navigationController?.pushViewController(detailVC, animated: true)
             tableView.deselectRowAtIndexPath(indexPath, animated: true)

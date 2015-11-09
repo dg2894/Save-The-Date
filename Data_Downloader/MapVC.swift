@@ -37,6 +37,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
                 map.setRegion(myRegion, animated: true)
             }
         } else {
+            print(index)
             let myRegion = MKCoordinateRegionMakeWithDistance(events[index!].coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)
             map.setRegion(myRegion, animated: true)
             map.selectAnnotation(events[index!], animated: false)

@@ -121,7 +121,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                     eventURL += url
                                 }
                                 
-                                if d2["description"] as! String == " "{
+                                if d2["description"] as? String == " " || d2["description"] is NSNull {
                                     eventDesc += "No description"
                                 } else if let desc = d2["description"] as! String?{
                                     var str = desc.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)

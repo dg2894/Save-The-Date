@@ -128,6 +128,12 @@ class DetailVC: UITableViewController {
             let alert = UIAlertController(title: "Oops!", message: "You have already favorited this event.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+        } else if indexPath.section == 5 && favesVC.mapFav != nil{
+            let mapView = self.tabBarController?.viewControllers?[1] as! MapVC
+            mapView.favEvent = favesVC.mapFav
+            mapView.fromDetail = true
+            tabBarController?.selectedIndex = 1
+            favesVC.mapFav = nil
         } else if indexPath.section == 5 {
             let mapView = self.tabBarController?.viewControllers?[1] as! MapVC
             mapView.index = bookmarkIndex

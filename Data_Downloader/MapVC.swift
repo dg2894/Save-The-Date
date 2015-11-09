@@ -16,10 +16,10 @@ class MapVC: UIViewController, MKMapViewDelegate {
     var METERS_PER_MILE:Double = 1609.344
     var index:Int?
     var fromDetail:Bool = false
+    var favEvent:EventfulEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -36,8 +36,14 @@ class MapVC: UIViewController, MKMapViewDelegate {
                 let myRegion = MKCoordinateRegionMakeWithDistance(events[0].coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)
                 map.setRegion(myRegion, animated: true)
             }
+        }
+        else if (favEvent != nil) {
+            let myRegion = MKCoordinateRegionMakeWithDistance(favEvent!.coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)
+            map.setRegion(myRegion, animated: true)
+            map.selectAnnotation(favEvent!, animated: false)
+            fromDetail = false
+            favEvent = nil
         } else {
-            print(index)
             let myRegion = MKCoordinateRegionMakeWithDistance(events[index!].coordinate, METERS_PER_MILE * 100,METERS_PER_MILE * 100)
             map.setRegion(myRegion, animated: true)
             map.selectAnnotation(events[index!], animated: false)

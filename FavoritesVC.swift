@@ -14,7 +14,7 @@ class FavoritesVC: UITableViewController {
     var noResults:Bool!
     var manager:EventManager = EventManager.sharedInstance
     var VC:ViewController!
-    
+    var mapFav:EventfulEvent?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +68,7 @@ class FavoritesVC: UITableViewController {
         if (!noResults){
             let detailVC: DetailVC = storyboard!.instantiateViewControllerWithIdentifier("DetailVC") as! DetailVC
             let bookmark = favorites[indexPath.row]
+            mapFav = favorites[indexPath.row]
             detailVC.bookmarkIndex = indexPath.row
             detailVC.bookmark = bookmark
             self.navigationController?.pushViewController(detailVC, animated: true)
